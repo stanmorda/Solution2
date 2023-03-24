@@ -10,45 +10,105 @@ namespace ConsoleApp1
         // {
         //     return count++;
         // }
-        
-        
-        
+
+
+        static double TOLERANCE = 0.0001;
+
         static void Main(string[] args)
         {
+
+
+            double result = 0;
+            result += 4;
+            result = result / 2;
+            result = result * 1.75;
             
+
             
-            // The operators include the unary logical negation (!),
-            // and the binary conditional logical AND (&&) and OR (||).
+            // switch
+            Console.WriteLine(result);
 
 
-
-            //11001
-
-            //Console.WriteLine();
-
-            bool b = true;
+            string stringRes = string.Empty;
             
-            do
+            switch (result)
             {
-                Console.WriteLine("Введите целое число:");
-
-                string read = Console.ReadLine();
-
-                bool result = Int32.TryParse(read, out int i);
-
-                if (result)
+                case >10:
+                    stringRes = "sdfgsfdg";
+                    break;
+                
+                case >9:
+                    stringRes = "345";
+                    break;
+                
+                case 0:
+                    stringRes = "zero";
+                    break;
+                
+                default:
+                    stringRes = "default";
+                    break;
+            }
+            
+            Console.WriteLine(stringRes);
+           
+            
+            static string GetString(double value) => value switch
+            {
+                >= 3 and < 6 => "spring",
+                >= 6 and < 9 => "summer",
+                >= 9 and < 12 => "autumn",
+                12 or (>= 1 and < 3) => "winter",
+                _ => throw new ArgumentOutOfRangeException("Unknown"),
+            };
+            
+            Console.WriteLine(GetString(result));
+            
+            
+            // if else
+            if (result == 10)
+            {
+                Console.Write("sdfgsfdg");
+            }
+            else
+            {
+                if(Math.Abs(result - 3.5) < TOLERANCE)
                 {
-                    i += 99;
-
-                    Console.WriteLine($"Ваше число: {i}");
-
-                    b = false;
+                    Console.Write("!!!");
                 }
+                else if (result == 0)
+                {
+                    Console.Write("zero");
+                }
+                else
+                {
+                    Console.Write("default");
+                }
+            }
 
-                Console.WriteLine("Некорректные данные.");
-
-            } while (b);
-         
+          
+            
+            // do
+            // {
+            //     Console.WriteLine("Введите целое число:");
+            //
+            //     string read = Console.ReadLine();
+            //
+            //     bool result = Int32.TryParse(read, out int i);
+            //
+            //     if (result)
+            //     {
+            //         i += 99;
+            //
+            //         Console.WriteLine($"Ваше число: {i}");
+            //
+            //         b = false;
+            //     }
+            //
+            //     Console.WriteLine("Некорректные данные.");
+            //
+            // } while (b);
+            //
             
             //int i = Convert.ToInt32(read);
            
@@ -83,12 +143,14 @@ namespace ConsoleApp1
             //
             // // true - false
             // bool b;
-            
-            
+
+
             
 
             
             Console.ReadLine();
         }
+        
+        
     }
 }
