@@ -6,8 +6,76 @@ namespace ConsoleApp4
     {
         static void Main(string[] args)
         {
+
+            // string[] states = new[] { "red", "yellow", "green" };
+            // string actualState = states[1];
+            //
+            // switch (actualState)
+            // {
+            //     case "red":
+            //         break;
+            // }
+            //
+
+            //
+            // float f = 1.5f;
+            // int i = (int)f;
+            //
+            // int g = 1;
+            // float j = g;
+
+            int j = 0;
             
-            Console.WriteLine(Factorial(4));
+            for (int i = 0; i < 10; i++)
+            {
+                j++;
+            }
+            
+            // i
+            
+            for (int i = 0; i < 10; i++)
+            {
+                j--;
+            }
+
+            
+            if (true)
+            {
+                int h = 0;
+                h -= 10;
+            }
+            else
+            {
+                if (false)
+                {
+                    int h = 0;
+                    h *= 10;
+                }
+                else
+                {
+                    
+                }
+            }
+            
+            
+            int intState = Convert.ToInt32(Console.ReadLine());
+            ColorState actualState = (ColorState)intState;
+           
+            actualState = ColorState.Yellow;
+            actualState = ColorState.Green;
+            
+            Console.WriteLine(actualState);
+
+
+            // string s = Console.ReadLine();
+            // if (Enum.TryParse(typeof(ColorState), s, true, out object actualState))
+            // {
+            //     Console.WriteLine($"Converted: {actualState}");
+            // }
+            // else
+            // {
+            //     Console.WriteLine($"FAIL");
+            // }
 
             // string task1Result = Task1(1, "2ssdfsd");
             //
@@ -18,9 +86,25 @@ namespace ConsoleApp4
             // Print(task2Result.Item1, "Сумма");
             // Print(task2Result.Item2, "Разность");
             // Print(task2Result.Item3, "Конкатенация чисел");
-            
-            
+
         }
+        enum ColorState
+        {
+            Red=10, 
+            Yellow=2,
+            Green=3
+        }
+
+        // enum ColorState
+        // {
+        //     Red=1, 
+        //     Yellow=2,
+        //     Green=3
+        // }
+        
+        
+  
+        
 
         // 1 = 1,
         // 2 = 1*2,
