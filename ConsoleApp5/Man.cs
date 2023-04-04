@@ -4,30 +4,35 @@ namespace ConsoleApp5
 {
     public class Man
     {
-        private string _name;
-        private byte _age;
+        private readonly string _name;
+        private byte _age = 77;
         private int _height;
         private int _weight;
+        private bool? _hasChildren;
         private Color _eyeColor;
-
-        private Color _hairColor;
-
         private Car _car;
+
+        private int? _temp;
 
         private static int _number;
         public static int GetNumber()
         {
             return _number;
         }
+
+        public Man(byte age)
+        {
+            _age = age;
+        }
         
         public Man(string name, byte age = 0)
         {
             _name = name;
+           
             _age = age;
         }
         
-        public Man(string name, byte age, Car car)
-         :this(name, age)
+        public Man(string name, byte age, Car car) : this(name, age)
         {
             _car = car;
         }
@@ -52,7 +57,7 @@ namespace ConsoleApp5
         public Man(string name, byte age, int height, int weight, Color eyeColor, Color hairColor) 
             : this(name, age, height, weight, eyeColor)
         {
-            _hairColor = hairColor;
+            HairColor = hairColor;
         }
 
         public string Name => _name;
@@ -60,13 +65,11 @@ namespace ConsoleApp5
         public byte Age => _age;
         public Color EyeColor => _eyeColor;
 
-        private bool SameColor => _hairColor == _eyeColor;
+        public Car Car => _car;
+
+        private bool SameColor => HairColor == _eyeColor;
         
-        public Color HairColor
-        {
-            get => _hairColor;
-            set => _hairColor = value;
-        }
+        public Color HairColor { get; set; }
 
         public int Weight
         {
@@ -80,7 +83,6 @@ namespace ConsoleApp5
                     _weight = value;
             }
         }
-
         
         
         public double Rank
@@ -131,6 +133,22 @@ namespace ConsoleApp5
         Black,
         Red,
         Unknown
+    }
+    
+    public enum State
+    {
+        True, 
+        False,
+        Unknown
+    }
+
+    public class Test
+    {
+        public string T { get; set; }
+        public string T1 { get; set; }
+        public string T2 { get; set; }
+        public string T3 { get; set; }
+        public string T4 { get; set; }
     }
     
 }

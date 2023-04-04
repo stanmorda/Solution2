@@ -7,6 +7,11 @@ namespace ConsoleApp5
         
         static void Main(string[] args)
         {
+
+            Console.WriteLine(Man.GetNumber());
+            
+            var test = new Man(66);
+            
             var ivan = new Man("Ivan", 10, 140, 40, Color.Black);
             
             var ivane1 = new Man("dsfgsdfg", 10);
@@ -15,12 +20,12 @@ namespace ConsoleApp5
             
             var petr = new Man("Petr", 30, new Car(2023, Car.CarColor.Black, 0));
             
-            Console.WriteLine(ivan.HairColor);
+            Console.WriteLine(ivan.Car);
             
             ivan.HairColor = Color.Black;
-            
-            
-            Console.WriteLine(ivan.HairColor);
+            //
+            //
+            // Console.WriteLine(ivan.HairColor);
 
             // Console.WriteLine(ivan.Rank);
             // Console.WriteLine(ivan.CalculateRank());
