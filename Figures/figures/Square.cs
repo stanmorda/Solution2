@@ -2,11 +2,11 @@
 
 namespace Figures.figures
 {
-    public class Square : Figure
+    public sealed class Square : Figure
     {
         private double _a;
 
-        public Square(double a)
+        public Square(double a, int figureId) : base(figureId)
         {
             _a = a;
         }
@@ -21,10 +21,8 @@ namespace Figures.figures
         
         public override FigureType FigureType => FigureType.Square;
 
-
-        public override string GetTitle()
-        {
-            return "Square";
-        }
+        
     }
+
+    
 }

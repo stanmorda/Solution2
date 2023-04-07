@@ -6,7 +6,7 @@ namespace Figures.figures
     {
         private double _a, _b, _c;
 
-        public Triangle(double a, double b, double c)
+        public Triangle(double a, double b, double c, int figureId) : base(figureId) 
         {
             _a = a;
             _b = b;
@@ -24,9 +24,5 @@ namespace Figures.figures
 
         public override FigureType FigureType => FigureType.Triangle;
 
-        public override string GetTitle()
-        {
-            return "Triangle";
-        }
     }
 }

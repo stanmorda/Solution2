@@ -6,11 +6,11 @@ namespace Figures.figures
     {
         private double _r;
 
-        public Circle(double r)
+        public Circle(double r, int figureId) : base(figureId) 
         {
             _r = r;
         }
-
+        
         public double R => _r;
         public double Diameter => 2 * _r;
 
@@ -18,10 +18,15 @@ namespace Figures.figures
         public override double Perimeter => 2 * Math.PI * _r; 
         
         public override FigureType FigureType => FigureType.Circle;
+        
+        
 
-        public override string GetTitle()
+    }
+
+    public class TringleCircle : Circle
+    {
+        public TringleCircle(double r, int figureId) : base(r, figureId)
         {
-            return "Circle";
         }
     }
 }

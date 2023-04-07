@@ -7,81 +7,130 @@ namespace Figures
 {
     class Program
     {
+        public class A
+        {
+            protected string S { get; set; }
+            public int I { get; set; }
+        }
+
+        public class B : A
+        {
+            public int K { get; set; }
+
+            public void Temp()
+            {
+                S = "sdfsdf";
+            }
+        }
+    
+        public class C : B
+        {
+            public int G { get; set; }
+
+        }
+    
+    
+        public class D : C
+        {
+            public int LL { get; set; }
+
+        }
+        
         static void Main(string[] args)
         {
             
+            Figure[] figures = new Figure[] { new Circle(4, 1), new Square(55, 2), new Circle(3, 4), new Square(33, 5) };
+
+            foreach (var figure in figures)
+            {
+                Console.WriteLine(figure.GetTitle());
+            }
+            
+            //var d = new D();
+            var a = new A();
+            var b = new B();
+
+           // var a = new A();
+            
+            bool result = b is A;
+            
+            Console.WriteLine(result);
+
+            return;
             // Circle:5
             // Square:10
             // Triangle:10,4,4
 
-            List<Figure> figures = new List<Figure>();
-
-            while (true)
-            {
-                string str = Console.ReadLine();
-
-                if (str == "EXIT")
-                {
-                    break;
-                }
-                
-                string[] arguments = str.Split(":");
-                string title = arguments[0];
-
-                if (Enum.TryParse(typeof(FigureType), title, true, out var temp))
-                {
-                    FigureType figureType = (FigureType)temp;
-                    Figure figure = null;
-                    
-                    string[] strValues = arguments[1].Split(",");
-                    double[] values = new double[strValues.Length];
-                    for (int i = 0; i < strValues.Length; i++)
-                    {
-                        values[i] = Convert.ToDouble(strValues[i]);
-                    }
-                    
-                    switch (figureType)
-                    {
-                        case FigureType.Circle:
-                            figure = new Circle(values[0]);
-                            break;
-                        
-                        case FigureType.Square:
-                            figure = new Square(values[0]);
-                            break;
-                        
-                        case FigureType.Triangle:
-                            figure = new Triangle(values[0],values[1],values[2]);
-                            break;
-                        default:
-                            throw new Exception("Не знаю такую фигуру");
-                    }   
-                    
-                    figures.Add(figure);
-                }
-                else
-                {
-                    Console.WriteLine("Не знаю такую фигуру");
-                }
-            }
-            
-            //Figure[] figures = new Figure[] { new Circle(4), new Square(55), new Circle(3), new Square(33) };
-
-            double summ = 0;
-            
-            foreach (var figure in figures)
-            {
-                summ += figure.Perimeter;
-            }
-
-            Console.WriteLine($"Суммарная площадь всех фигур: {summ}");
+            // List<Figure> figures = new List<Figure>();
+            // int number = 0;
+            // while (true)
+            // {
+            //     string str = Console.ReadLine();
+            //
+            //     if (str == "EXIT")
+            //     {
+            //         break;
+            //     }
+            //     
+            //     string[] arguments = str.Split(":");
+            //     string title = arguments[0];
+            //
+            //     if (Enum.TryParse(typeof(FigureType), title, true, out var temp))
+            //     {
+            //         FigureType figureType = (FigureType)temp;
+            //         Figure figure = null;
+            //         
+            //         string[] strValues = arguments[1].Split(",");
+            //         double[] values = new double[strValues.Length];
+            //         for (int i = 0; i < strValues.Length; i++)
+            //         {
+            //             values[i] = Convert.ToDouble(strValues[i]);
+            //         }
+            //         
+            //         switch (figureType)
+            //         {
+            //             case FigureType.Circle:
+            //                 figure = new Circle(values[0], number);
+            //                 break;
+            //             
+            //             case FigureType.Square:
+            //                 figure = new Square(values[0], number);
+            //                 break;
+            //             
+            //             case FigureType.Triangle:
+            //                 figure = new Triangle(values[0],values[1],values[2], number);
+            //                 break;
+            //             default:
+            //                 throw new Exception("Не знаю такую фигуру");
+            //         }
+            //
+            //         number++;
+            //         figures.Add(figure);
+            //     }
+            //     else
+            //     {
+            //         Console.WriteLine("Не знаю такую фигуру");
+            //     }
+            // }
+            //
             
             
-            Console.WriteLine("Areas.");
-            Console.WriteLine(CalculateAreas(figures));
             
-            Console.WriteLine("Perimeters.");
-            Console.WriteLine(CalculatePerimeters(figures));
+            // double summ = 0;
+            //
+            // foreach (var figure in figures)
+            // {
+            //     summ += figure.Perimeter;
+            // }
+            //
+            // Console.WriteLine($"Суммарная площадь всех фигур: {summ}");
+            //
+            //
+            // Console.WriteLine("Areas.");
+            // Console.WriteLine(CalculateAreas(figures));
+            //
+            // Console.WriteLine("Perimeters.");
+            // Console.WriteLine(CalculatePerimeters(figures));
             
         }
 
