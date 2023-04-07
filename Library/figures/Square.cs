@@ -1,11 +1,14 @@
 ﻿using System;
+using Library.figures.@abstract;
 
-namespace Figures.figures
+namespace Library.figures
 {
-    public sealed class Square : Figure
+    public sealed class Square : TwoDimensionFigure
     {
         private double _a;
 
+        private const int Angles = 4;
+        
         public Square(double a, int figureId) : base(figureId)
         {
             _a = a;
@@ -20,8 +23,10 @@ namespace Figures.figures
         public override double Perimeter => 4 * _a;
         
         public override FigureType FigureType => FigureType.Square;
-
-        
+        public override int GetAnglesCount()
+        {
+            return Angles;
+        }
     }
 
     

@@ -1,62 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Figures.figures;
+using Library.figures;
+using Library.figures.@abstract;
 
 namespace Figures
 {
     class Program
     {
-        public class A
-        {
-            protected string S { get; set; }
-            public int I { get; set; }
-        }
-
-        public class B : A
-        {
-            public int K { get; set; }
-
-            public void Temp()
-            {
-                S = "sdfsdf";
-            }
-        }
-    
-        public class C : B
-        {
-            public int G { get; set; }
-
-        }
-    
-    
-        public class D : C
-        {
-            public int LL { get; set; }
-
-        }
+        // public class A
+        // {
+        //     protected string S { get; set; }
+        //     public int I { get; set; }
+        // }
+        //
+        // public class B : A
+        // {
+        //     public int K { get; set; }
+        //
+        //     public void Temp()
+        //     {
+        //         S = "sdfsdf";
+        //     }
+        // }
+        //
+        // public class C : B
+        // {
+        //     public int G { get; set; }
+        //
+        // }
+        //
+        //
+        // public class D : C
+        // {
+        //     public int LL { get; set; }
+        //
+        // }
         
         static void Main(string[] args)
         {
             
-            Figure[] figures = new Figure[] { new Circle(4, 1), new Square(55, 2), new Circle(3, 4), new Square(33, 5) };
-
-            foreach (var figure in figures)
-            {
-                Console.WriteLine(figure.GetTitle());
-            }
+            // 
+            // foreach (var figure in figures)
+            // {
+            //     Console.WriteLine($"{figure.ToString()} - {figure.GetColor()}");
+            // }
             
-            //var d = new D();
-            var a = new A();
-            var b = new B();
+           //  //var d = new D();
+           //  var a = new A();
+           //  var b = new B();
+           //
+           // // var a = new A();
+           //  
+           //  bool result = b is A;
+           //  
+           //  Console.WriteLine(result);
 
-           // var a = new A();
-            
-            bool result = b is A;
-            
-            Console.WriteLine(result);
-
-            return;
             // Circle:5
             // Square:10
             // Triangle:10,4,4
@@ -115,16 +114,29 @@ namespace Figures
             //
             
             
+            Figure[] figures = new Figure[] { 
+                new Circle(4, 1), 
+                new Square(55, 2), 
+                new Cube(77, 88),
+                new Circle(3, 4), 
+                new Square(33, 5), 
+                new Triangle(1,5,6,9),
+                new Cube(88, 9999)
+            };
             
-            // double summ = 0;
-            //
-            // foreach (var figure in figures)
-            // {
-            //     summ += figure.Perimeter;
-            // }
-            //
-            // Console.WriteLine($"Суммарная площадь всех фигур: {summ}");
-            //
+            double summ = 0;
+            
+            foreach (var figure in figures)
+            {
+                // if (figure is ThreeDimensionFigure threeDimensionFigure)
+                // {
+                //     summ += threeDimensionFigure.Volume;
+                // } 
+                summ += figure.Perimeter;
+            }
+            
+            Console.WriteLine($"Суммарная площадь всех фигур: {summ}");
+            
             //
             // Console.WriteLine("Areas.");
             // Console.WriteLine(CalculateAreas(figures));

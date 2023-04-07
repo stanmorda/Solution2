@@ -1,11 +1,14 @@
 ﻿using System;
+using Library.figures.@abstract;
 
-namespace Figures.figures
+namespace Library.figures
 {
-    public class Triangle : Figure
+    public class Triangle : TwoDimensionFigure
     {
         private double _a, _b, _c;
 
+        private const int Angles = 3;
+        
         public Triangle(double a, double b, double c, int figureId) : base(figureId) 
         {
             _a = a;
@@ -21,8 +24,17 @@ namespace Figures.figures
 
         public override double Area => throw new Exception("Не умею");
         public override double Perimeter => _a + _b + _c;
+        
 
         public override FigureType FigureType => FigureType.Triangle;
+        public override int GetAnglesCount()
+        {
+            return Angles;
+        }
 
+        public override FigureColor GetColor()
+        {
+            return FigureColor.White;
+        }
     }
 }

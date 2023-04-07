@@ -1,8 +1,9 @@
 ﻿using System;
+using Library.figures.@abstract;
 
-namespace Figures.figures
+namespace Library.figures
 {
-    public class Circle : Figure
+    public class Circle : TwoDimensionFigure
     {
         private double _r;
 
@@ -18,15 +19,18 @@ namespace Figures.figures
         public override double Perimeter => 2 * Math.PI * _r; 
         
         public override FigureType FigureType => FigureType.Circle;
-        
-        
-
+        public override int GetAnglesCount()
+        {
+            return 0;
+        }
     }
 
-    public class TringleCircle : Circle
+    public abstract class TringleCircle : Figure
     {
-        public TringleCircle(double r, int figureId) : base(r, figureId)
+        protected TringleCircle(int figureId) : base(figureId)
         {
         }
     }
+    
+    
 }
