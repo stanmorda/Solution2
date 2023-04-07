@@ -3,11 +3,11 @@ using Library.figures.@abstract;
 
 namespace Library.figures
 {
-    public class Circle : TwoDimensionFigure
+    public class Circle : ITwoDimensionFigure
     {
         private double _r;
 
-        public Circle(double r, int figureId) : base(figureId) 
+        public Circle(double r, int figureId)
         {
             _r = r;
         }
@@ -15,22 +15,19 @@ namespace Library.figures
         public double R => _r;
         public double Diameter => 2 * _r;
 
-        public override double Area => Math.PI * Math.Pow(_r, 2);
-        public override double Perimeter => 2 * Math.PI * _r; 
+        public double Area => Math.PI * Math.Pow(_r, 2);
+        public double Perimeter => 2 * Math.PI * _r; 
         
-        public override FigureType FigureType => FigureType.Circle;
-        public override int GetAnglesCount()
+        public FigureType FigureType => FigureType.Circle;
+        public int FigureId { get; }
+
+        public int GetAnglesCount()
         {
             return 0;
         }
     }
 
-    public abstract class TringleCircle : Figure
-    {
-        protected TringleCircle(int figureId) : base(figureId)
-        {
-        }
-    }
+
     
     
 }

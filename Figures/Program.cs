@@ -8,34 +8,7 @@ namespace Figures
 {
     class Program
     {
-        // public class A
-        // {
-        //     protected string S { get; set; }
-        //     public int I { get; set; }
-        // }
-        //
-        // public class B : A
-        // {
-        //     public int K { get; set; }
-        //
-        //     public void Temp()
-        //     {
-        //         S = "sdfsdf";
-        //     }
-        // }
-        //
-        // public class C : B
-        // {
-        //     public int G { get; set; }
-        //
-        // }
-        //
-        //
-        // public class D : C
-        // {
-        //     public int LL { get; set; }
-        //
-        // }
+        
         
         static void Main(string[] args)
         {
@@ -112,9 +85,11 @@ namespace Figures
             //     }
             // }
             //
+
+
+            var logger = new FileLogger("log.txt");
             
-            
-            Figure[] figures = new Figure[] { 
+            IFigure[] figures = new IFigure[] { 
                 new Circle(4, 1), 
                 new Square(55, 2), 
                 new Cube(77, 88),
@@ -132,8 +107,12 @@ namespace Figures
                 // {
                 //     summ += threeDimensionFigure.Volume;
                 // } 
+                logger.Log($"{figure}:{figure.Perimeter}");
+                
                 summ += figure.Perimeter;
             }
+            
+            logger.Dispose();
             
             Console.WriteLine($"Суммарная площадь всех фигур: {summ}");
             
@@ -145,8 +124,37 @@ namespace Figures
             // Console.WriteLine(CalculatePerimeters(figures));
             
         }
+        
+        // public class A
+        // {
+        //     protected string S { get; set; }
+        //     public int I { get; set; }
+        // }
+        //
+        // public class B : A
+        // {
+        //     public int K { get; set; }
+        //
+        //     public void Temp()
+        //     {
+        //         S = "sdfsdf";
+        //     }
+        // }
+        //
+        // public class C : B
+        // {
+        //     public int G { get; set; }
+        //
+        // }
+        //
+        //
+        // public class D : C
+        // {
+        //     public int LL { get; set; }
+        //
+        // }
 
-        static string CalculateAreas(List<Figure> figures)
+        static string CalculateAreas(List<IFigure> figures)
         {
             StringBuilder sb = new StringBuilder();
             foreach (var figure in figures)
@@ -158,7 +166,7 @@ namespace Figures
             return sb.ToString();
         }
         
-        static string CalculatePerimeters(List<Figure> figures)
+        static string CalculatePerimeters(List<IFigure> figures)
         {
             StringBuilder sb = new StringBuilder();
             foreach (var figure in figures)

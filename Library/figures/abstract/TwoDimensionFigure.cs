@@ -1,11 +1,9 @@
-﻿namespace Library.figures.@abstract
+﻿using System;
+
+namespace Library.figures.@abstract
 {
-    public abstract class TwoDimensionFigure : Figure
+    public interface ITwoDimensionFigure : IFigure
     {
-        protected TwoDimensionFigure(int figureId) : base(figureId)
-        {
-        }
-        
-        
+ 
     }
 }

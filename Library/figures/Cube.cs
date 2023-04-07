@@ -3,24 +3,25 @@ using Library.figures.@abstract;
 
 namespace Library.figures
 {
-    public class Cube : ThreeDimensionFigure
+    public class Cube : IThreeDimensionFigure
     {
         private double _a;
         
-        public Cube(int figureId, double a) : base(figureId)
+        public Cube(int figureId, double a) 
         {
             _a = a;
         }
 
-        public override double Area => 6 * _a * _a;
-        public override double Perimeter => 8 * _a;
-        public override FigureType FigureType => FigureType.Cube;
-        
-        public override int GetAnglesCount()
+        public double Area => 6 * _a * _a;
+        public double Perimeter => 8 * _a;
+        public FigureType FigureType => FigureType.Cube;
+        public int FigureId { get; }
+
+        public int GetAnglesCount()
         {
             return 8;
         }
 
-        public override double Volume => Math.Pow(_a, 3);
+        public double Volume => Math.Pow(_a, 3);
     }
 }

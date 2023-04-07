@@ -3,13 +3,13 @@ using Library.figures.@abstract;
 
 namespace Library.figures
 {
-    public class Triangle : TwoDimensionFigure
+    public class Triangle : ITwoDimensionFigure
     {
         private double _a, _b, _c;
 
         private const int Angles = 3;
         
-        public Triangle(double a, double b, double c, int figureId) : base(figureId) 
+        public Triangle(double a, double b, double c, int figureId) 
         {
             _a = a;
             _b = b;
@@ -22,17 +22,19 @@ namespace Library.figures
 
         public double C => _c;
 
-        public override double Area => throw new Exception("Не умею");
-        public override double Perimeter => _a + _b + _c;
+        public double Area => throw new Exception("Не умею");
+        public double Perimeter => _a + _b + _c;
         
 
-        public override FigureType FigureType => FigureType.Triangle;
-        public override int GetAnglesCount()
+        public FigureType FigureType => FigureType.Triangle;
+        public int FigureId { get; }
+
+        public  int GetAnglesCount()
         {
             return Angles;
         }
 
-        public override FigureColor GetColor()
+        public FigureColor GetColor()
         {
             return FigureColor.White;
         }

@@ -1,37 +1,33 @@
 ﻿namespace Library.figures.@abstract
 {
-    public abstract class Figure
+    public interface IFigure
     {
-        public abstract double Area { get; }
+        public double Area { get; }
         
-        public abstract double Perimeter { get; }
+        public double Perimeter { get; }
         
-        public abstract FigureType FigureType { get; }
+        public FigureType FigureType { get; }
 
         public int FigureId { get; }
         public object Title => FigureType.ToString();
 
-        public Figure(int figureId)
-        {
-            FigureId = figureId;
-        }
+        // public Figure(int figureId)
+        // {
+        //     FigureId = figureId;
+        // }
 
         public string GetTitle()
         {
             return $"{FigureId}:{Title}";
         }
         
-        public abstract int GetAnglesCount();
+        public int GetAnglesCount();
 
-        public virtual FigureColor GetColor()
+        public FigureColor GetColor()
         {
             return FigureColor.Black;
         }
         
-        public override string ToString()
-        {
-            return GetTitle();
-        }
     }
 
     public enum FigureType

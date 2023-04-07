@@ -1,11 +1,7 @@
 ﻿namespace Library.figures.@abstract
 {
-    public abstract class ThreeDimensionFigure : Figure
+    public interface IThreeDimensionFigure : IFigure
     {
-        protected ThreeDimensionFigure(int figureId) : base(figureId)
-        {
-        }
-        
-        public abstract double Volume { get; }
+        public double Volume { get; }
     }
 }
