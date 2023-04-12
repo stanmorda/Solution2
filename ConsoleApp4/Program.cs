@@ -1,12 +1,88 @@
 ﻿using System;
+using System.IO;
+using System.Runtime.Serialization;
 
 namespace ConsoleApp4
 {
     class Program
     {
+
+        class MoreThan100Exception : ArithmeticException
+        {
+            public MoreThan100Exception()
+            {
+            }
+
+            protected MoreThan100Exception(SerializationInfo info, StreamingContext context) : base(info, context)
+            {
+            }
+
+            public MoreThan100Exception(string message) : base(message)
+            {
+            }
+
+            public MoreThan100Exception(string message, Exception innerException) : base(message, innerException)
+            {
+            }
+        }
+        
+        static double Divide(double a, double b)
+        {
+            if (b == 0)
+            {
+                throw new DivideByZeroException("b == 0");
+            }
+
+            if (a > 100 || b > 100)
+            {
+                throw new MoreThan100Exception("Не умеем делить числа больше 100");
+            }
+
+            return a / b;
+        }
+        
         static void Main(string[] args)
         {
+            var s1 = Console.ReadLine();
+            var s2 = Console.ReadLine();
 
+            try
+            {
+                var d1 = Convert.ToDouble(s1);
+                var d2 = Convert.ToDouble(s2);
+
+                var result = Divide(d1, d2);
+                Console.WriteLine($"Result: {result:N1}");
+            }
+            catch (MoreThan100Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                s1 = "";
+                s2 = "";
+                Console.WriteLine("FINALLY");
+            }
+            
+            // {
+            //     Console.WriteLine("Деление на ноль запрещено!");
+            // }
+            // catch (ArgumentException exception)
+            // {
+            //     Console.WriteLine(exception.Message);
+            //     Console.WriteLine(exception.StackTrace);
+            // }
+
+            return;
+            // var r = Format<int>(1, 4);
+            // var r1 = Format<float>(1f, 4f);
+            // var r2 = Format<string>("bla", "bla");
+            //
+            // Console.WriteLine(r);
+            // Console.WriteLine(r1);
+            // Console.WriteLine(r2);
+            
             // string[] states = new[] { "red", "yellow", "green" };
             // string actualState = states[1];
             //
@@ -142,7 +218,9 @@ namespace ConsoleApp4
                 return Factorial(n - 1) * n;
             }
         }
-        
+
+
+  
         
         static (double, double, string) SummaAndRaznots(double a, double b)
         {

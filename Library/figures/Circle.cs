@@ -3,13 +3,14 @@ using Library.figures.@abstract;
 
 namespace Library.figures
 {
-    public class Circle : ITwoDimensionFigure
+    public class Circle : ITwoDimensionFigure<string>
     {
         private double _r;
 
-        public Circle(double r, int figureId)
+        public Circle(double r, string figureId)
         {
             _r = r;
+            FigureId = figureId;
         }
         
         public double R => _r;
@@ -19,12 +20,18 @@ namespace Library.figures
         public double Perimeter => 2 * Math.PI * _r; 
         
         public FigureType FigureType => FigureType.Circle;
-        public int FigureId { get; }
+        public string FigureId { get; }
+
+        public string TestMethod()
+        {
+            return "blabalbal";
+        }
 
         public int GetAnglesCount()
         {
             return 0;
         }
+        
     }
 
 

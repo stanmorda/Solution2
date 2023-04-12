@@ -8,12 +8,64 @@ namespace Figures
 {
     class Program
     {
+
+        abstract class Obj<T, K> 
+        {
+            public T Id { get; set; }
+            public K Data { get; set; }
+            
+            public Obj(T id, K data, string name = "fsdf")
+            {
+                Id = id;
+                Data = data;
+                Name = name;
+            }
+
+            public string Name { get; set; }
+
+            public string Format()
+            {
+                return Name + $"{Id}";
+            }
+        }
+
+
+        class ObjString : Obj<string, string>
+        {
+            public ObjString(string id, string name = "fsdf") : base(id, name)
+            {
+            }
+        }
         
+        class ObjInt : Obj<int, string>
+        {
+            public ObjInt(int id, string name = "fsdf") : base(id, name)
+            {
+            }
+        }   
+        class ObjByte : Obj<byte, double>
+        {
+            public ObjByte(byte id, string name = "fsdf") : base(id, name)
+            {
+            }
+        }
         
         static void Main(string[] args)
         {
+
+            var obj1 = new ObjByte(1);
+            var obj2 = new ObjString("id_1");
+            var obj3 = new ObjString("id_2");
             
-            // 
+         //  public class GenericFigure<T> where T : IFigure<string>
+
+           //var figure = new GenericFigure<Circle>(new Circle(1, "id"));
+
+           List<string> listString = new List<string>();
+           List<int> listInt = new List<int>();
+
+           List<Circle> listCircles = new List<Circle>();
+           // 
             // foreach (var figure in figures)
             // {
             //     Console.WriteLine($"{figure.ToString()} - {figure.GetColor()}");
@@ -88,29 +140,41 @@ namespace Figures
 
 
             var logger = new FileLogger("log.txt");
+
+            var tr1 = new Triangle<int>(a: 1, b: 2, c: 4, figureId: 99);
+            var tr2 = new Triangle<string>(a: 1, b: 2, c: 4, figureId: "string_triangle_1");
+            var tr3 = new Triangle<byte>(a: 1, b: 2, c: 4, figureId: 10);
+            var tr4 = new Triangle<bool>(a: 1, b: 2, c: 4, figureId: true);
+
+            var circle = new Circle(r: 5, figureId: "_circle_");
+            circle.TestMethod();
             
-            IFigure[] figures = new IFigure[] { 
-                new Circle(4, 1), 
-                new Square(55, 2), 
-                new Cube(77, 88),
-                new Circle(3, 4), 
-                new Square(33, 5), 
-                new Triangle(1,5,6,9),
-                new Cube(88, 9999)
-            };
+            // var figures = new Triangle<object>[] { tr1, tr3 };
+            
+            // IFigure[] figures = new IFigure[] { 
+            //     new Circle(r: 4, figureId: 1), 
+            //     new Square(a: 55, figureId: "square1"), 
+            //     new Cube(77, 88),
+            //     new Circle(3, 4), 
+            //     new Square(33, 5), 
+            //     new Triangle(1,5,6,9),
+            //     new Cube(88, 9999)
+            // };
+
+            
             
             double summ = 0;
             
-            foreach (var figure in figures)
-            {
-                // if (figure is ThreeDimensionFigure threeDimensionFigure)
-                // {
-                //     summ += threeDimensionFigure.Volume;
-                // } 
-                logger.Log($"{figure}:{figure.Perimeter}");
-                
-                summ += figure.Perimeter;
-            }
+            // foreach (var figure in figures)
+            // {
+            //     // if (figure is ThreeDimensionFigure threeDimensionFigure)
+            //     // {
+            //     //     summ += threeDimensionFigure.Volume;
+            //     // } 
+            //     logger.Log($"{figure.FigureId}:{figure.Perimeter}");
+            //     
+            //     summ += figure.Perimeter;
+            // }
             
             logger.Dispose();
             
@@ -154,28 +218,28 @@ namespace Figures
         //
         // }
 
-        static string CalculateAreas(List<IFigure> figures)
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach (var figure in figures)
-            {
-                var str = $"{figure.GetTitle()}:{figure.Area:F1}";
-                sb.AppendLine(str);
-            }
-
-            return sb.ToString();
-        }
-        
-        static string CalculatePerimeters(List<IFigure> figures)
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach (var figure in figures)
-            {
-                var str = $"{figure.GetTitle()}:{figure.Perimeter:F1}";
-                sb.AppendLine(str);
-            }
-
-            return sb.ToString();
-        }
+        // static string CalculateAreas(List<IFigure> figures)
+        // {
+        //     StringBuilder sb = new StringBuilder();
+        //     foreach (var figure in figures)
+        //     {
+        //         var str = $"{figure.GetTitle()}:{figure.Area:F1}";
+        //         sb.AppendLine(str);
+        //     }
+        //
+        //     return sb.ToString();
+        // }
+        //
+        // static string CalculatePerimeters(List<IFigure> figures)
+        // {
+        //     StringBuilder sb = new StringBuilder();
+        //     foreach (var figure in figures)
+        //     {
+        //         var str = $"{figure.GetTitle()}:{figure.Perimeter:F1}";
+        //         sb.AppendLine(str);
+        //     }
+        //
+        //     return sb.ToString();
+        // }
     }
 }

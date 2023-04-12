@@ -2,7 +2,7 @@
 
 namespace Library.figures.@abstract
 {
-    public interface ITwoDimensionFigure : IFigure
+    public interface ITwoDimensionFigure<T> : IFigure<T>
     {
  
     }

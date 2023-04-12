@@ -1,6 +1,8 @@
-﻿namespace Library.figures.@abstract
+﻿using System;
+
+namespace Library.figures.@abstract
 {
-    public interface IFigure
+    public interface IFigure<T>  
     {
         public double Area { get; }
         
@@ -8,7 +10,8 @@
         
         public FigureType FigureType { get; }
 
-        public int FigureId { get; }
+        public T FigureId { get; }
+        
         public object Title => FigureType.ToString();
 
         // public Figure(int figureId)
@@ -16,6 +19,8 @@
         //     FigureId = figureId;
         // }
 
+        public T TestMethod();
+        
         public string GetTitle()
         {
             return $"{FigureId}:{Title}";

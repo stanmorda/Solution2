@@ -3,13 +3,13 @@ using Library.figures.@abstract;
 
 namespace Library.figures
 {
-    public sealed class Square : ITwoDimensionFigure
+    public sealed class Square : ITwoDimensionFigure<byte>
     {
         private double _a;
 
         private const int Angles = 4;
         
-        public Square(double a, int figureId)
+        public Square(double a, byte figureId)
         {
             _a = a;
         }
@@ -23,7 +23,12 @@ namespace Library.figures
         public  double Perimeter => 4 * _a;
         
         public  FigureType FigureType => FigureType.Square;
-        public int FigureId { get; }
+        public byte FigureId { get; }
+
+        public byte TestMethod()
+        {
+            return default(byte);
+        }
 
         public  int GetAnglesCount()
         {
