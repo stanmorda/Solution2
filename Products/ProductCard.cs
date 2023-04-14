@@ -9,18 +9,24 @@ namespace Products
         public List<Product> Items { get; }
 
 
-        public delegate void NotifyAddedProduct(Product product);
-        public delegate void NotifyOfSalePercent(decimal sale, decimal summOfSale);
+       // public delegate void Action<in T>(T obj);
+       // public delegate void NotifyAddedProduct(Product product);
+       // public delegate void NotifyOfSalePercent(decimal sale, decimal summOfSale);
         
 
-        private readonly NotifyAddedProduct _notifyAddedProduct;
-        private readonly NotifyOfSalePercent _notifyOfSalePercent;
-        
-        public ProductCard(NotifyAddedProduct notifyAddedProduct, NotifyOfSalePercent notifyOfSalePercent)
+        private readonly Action<Product> _notifyAddedProduct;
+        private readonly Action<decimal, decimal> _notifyOfSalePercent;
+        private readonly Func<decimal, decimal> _calculateSaleFunc;
+
+        private readonly Predicate<decimal> _presentGift;
+
+        public ProductCard(Action<Product> notifyAddedProduct, Action<decimal, decimal> notifyOfSalePercent, Func<decimal, decimal> calculateSaleFunc, Predicate<decimal> presentGift)
         {
             Items = new List<Product>();
             _notifyAddedProduct = notifyAddedProduct;
             _notifyOfSalePercent = notifyOfSalePercent;
+            _calculateSaleFunc = calculateSaleFunc;
+            _presentGift = presentGift;
         }
         public void AddProduct(Product product)
         {   
@@ -36,25 +42,18 @@ namespace Products
                 summ += product.Price;
             }
 
-            decimal sale = 1M;
+            if (_presentGift(summ))
+            {
+                Console.WriteLine("Подарим подарок!");
+            }
             
-            if (summ > 1000)
-            {
-                sale = 0.95M;
-            }
-            else if (summ > 100)
-            {
-                sale = 0.975M;
-            }
-            else if (summ > 25)
-            {
-                sale =  0.99M;
-            }
+            decimal sale = _calculateSaleFunc(summ);
 
             _notifyOfSalePercent(1M-sale, summ*(1M-sale));
             
             return summ * sale;
         }
+
 
         public string PrintAllProduct()
         {

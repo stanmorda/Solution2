@@ -8,19 +8,36 @@ namespace Products
         static void Main(string[] args)
         {
 
-            var pr1 = new Product(100, "pr1");
+            var pr1 = new Product(10000, "pr1");
             var pr2 = new Product(99, "pr2");
             var pr3 = new Product(10, "pr3");
 
             Console.WriteLine("perekrestok");
-            var productCardperekrestok = new ProductCard(NotifyPerekrestok, NotifyOfSaleByConsole);
-            productCardperekrestok.AddProduct(pr1);
-            productCardperekrestok.AddProduct(pr2);
-            productCardperekrestok.AddProduct(pr3);
-            Console.WriteLine($"Total: {productCardperekrestok.GetTotalSumm():N0}");
-
-            var card2 = new ProductCard(NotifyPerekrestok, NotifyOfSaleByFile);
-            Console.WriteLine($"Total: {card2.GetTotalSumm():N0}");
+            var card1 = new ProductCard(
+                product => { Console.WriteLine($"Added new product: {product}"); },
+                (sale, summOfSale) =>
+                {
+                    Console.WriteLine($"Скидка составила {sale:P} процентов. В деньгах: {summOfSale:N0}");
+                },
+                (arg) => 0.8M, 
+                summ =>
+                {
+                    if (summ > 1000) return true;
+                    return false;
+                });
+            
+            card1.AddProduct(pr1);
+            Console.WriteLine($"Total: {card1.GetTotalSumm():N0}");
+            
+            
+            // Console.WriteLine("magin");
+            // var card2 = new ProductCard(NotifyMagnit, NotifyOfSaleByConsole, CalculateSaleMagnit);
+            // card2.AddProduct(pr2);
+            // Console.WriteLine($"Total: {card2.GetTotalSumm():N0}");
+            //
+            // //
+            // var card2 = new ProductCard(NotifyPerekrestok, NotifyOfSaleByFile);
+            // Console.WriteLine($"Total: {card2.GetTotalSumm():N0}");
 
             // Console.WriteLine("DIKSI");
             // var productCardDiksi = new ProductCard(NotifyDiksi, NotifyOfSale);
@@ -60,6 +77,35 @@ namespace Products
         {
             var message = $"Скидка составила {sale:P} процентов. В деньгах: {summOfSale:N0}";
             File.WriteAllText("log.txt", message);
+        }
+        
+        // private readonly Func<decimal, decimal> _calculateSaleFunc;
+
+        public static decimal CalculateSaleMagnit(decimal summ)
+        {
+            decimal sale = 1;
+            
+            if (summ > 1000)
+            {
+                sale = 0.95M;
+            }
+            else if (summ > 100)
+            {
+                sale = 0.975M;
+            }
+            else if (summ > 25)
+            {
+                sale =  0.99M;
+            }
+        
+            return sale;
+        }
+        
+        public static decimal CalculateSalePerekrestok(decimal summ)
+        {
+            decimal sale = 0.9M;
+        
+            return sale;
         }
     }
 }

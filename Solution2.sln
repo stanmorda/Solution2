@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "Library\Library.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Products", "Products\Products.csproj", "{97660D8D-1F58-4ABE-B24A-5BD5C476A9CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransportPayment", "TransportPayment\TransportPayment.csproj", "{FEABD463-E443-46D0-A6F2-8E9E9704B8B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,5 +56,9 @@ Global
 		{97660D8D-1F58-4ABE-B24A-5BD5C476A9CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97660D8D-1F58-4ABE-B24A-5BD5C476A9CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97660D8D-1F58-4ABE-B24A-5BD5C476A9CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEABD463-E443-46D0-A6F2-8E9E9704B8B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEABD463-E443-46D0-A6F2-8E9E9704B8B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEABD463-E443-46D0-A6F2-8E9E9704B8B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEABD463-E443-46D0-A6F2-8E9E9704B8B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
