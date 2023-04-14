@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Products
@@ -9,23 +10,24 @@ namespace Products
 
 
         public delegate void NotifyAddedProduct(Product product);
+        public delegate void NotifyOfSalePercent(decimal sale, decimal summOfSale);
+        
 
         private readonly NotifyAddedProduct _notifyAddedProduct;
+        private readonly NotifyOfSalePercent _notifyOfSalePercent;
         
-        public ProductCard(NotifyAddedProduct notifyAddedProduct)
+        public ProductCard(NotifyAddedProduct notifyAddedProduct, NotifyOfSalePercent notifyOfSalePercent)
         {
             Items = new List<Product>();
             _notifyAddedProduct = notifyAddedProduct;
+            _notifyOfSalePercent = notifyOfSalePercent;
         }
-
         public void AddProduct(Product product)
         {   
             Items.Add(product);
             _notifyAddedProduct(product);
         }
 
-        
-        
         public decimal GetTotalSumm()
         {
             decimal summ = 0;
@@ -34,20 +36,24 @@ namespace Products
                 summ += product.Price;
             }
 
+            decimal sale = 1M;
+            
             if (summ > 1000)
             {
-                return summ * 0.95M;
+                sale = 0.95M;
             }
-            if (summ > 100)
+            else if (summ > 100)
             {
-                return summ * 0.975M;
+                sale = 0.975M;
             }
-            if (summ > 25)
+            else if (summ > 25)
             {
-                return summ * 0.99M;
+                sale =  0.99M;
             }
+
+            _notifyOfSalePercent(1M-sale, summ*(1M-sale));
             
-            return summ;
+            return summ * sale;
         }
 
         public string PrintAllProduct()
@@ -60,7 +66,6 @@ namespace Products
 
             return stringBuilder.ToString();
         }
-        
-        
     }
+    
 }
