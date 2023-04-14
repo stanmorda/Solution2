@@ -28,5 +28,6 @@ namespace Library.figures
         }
 
         public double Volume => Math.Pow(_a, 3);
+
     }
 }

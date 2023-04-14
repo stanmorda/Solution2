@@ -7,7 +7,7 @@ namespace ConsoleApp4
     class Program
     {
 
-        class MoreThan100Exception : ArithmeticException
+        class MoreThan100Exception : Exception
         {
             public MoreThan100Exception()
             {
@@ -53,10 +53,6 @@ namespace ConsoleApp4
 
                 var result = Divide(d1, d2);
                 Console.WriteLine($"Result: {result:N1}");
-            }
-            catch (MoreThan100Exception e)
-            {
-                throw e;
             }
             finally
             {
