@@ -17,9 +17,16 @@ namespace Products
         private readonly Action<Product> _notifyAddedProduct;
         private readonly Action<decimal, decimal> _notifyOfSalePercent;
         private readonly Func<decimal, decimal> _calculateSaleFunc;
-
         private readonly Predicate<decimal> _presentGift;
 
+
+        public event EventHandler<ProductAddEventArgs> ProductAddedEvent;
+        
+        public void OnProductAddedEvent(Product addedProduct)
+        {
+            ProductAddedEvent?.Invoke(this, new ProductAddEventArgs(addedProduct));
+        }
+        
         public ProductCard(Action<Product> notifyAddedProduct, Action<decimal, decimal> notifyOfSalePercent, Func<decimal, decimal> calculateSaleFunc, Predicate<decimal> presentGift)
         {
             Items = new List<Product>();
@@ -28,10 +35,20 @@ namespace Products
             _calculateSaleFunc = calculateSaleFunc;
             _presentGift = presentGift;
         }
+        
         public void AddProduct(Product product)
         {   
             Items.Add(product);
+            OnProductAddedEvent(product);
             _notifyAddedProduct(product);
+        }
+
+        public void AddProducts(params Product[] products)
+        {
+            foreach (var product in products)
+            {
+                AddProduct(product);
+            }
         }
 
         public decimal GetTotalSumm()
@@ -65,6 +82,9 @@ namespace Products
 
             return stringBuilder.ToString();
         }
+
+
+ 
     }
     
 }
