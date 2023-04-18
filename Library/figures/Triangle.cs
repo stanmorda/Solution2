@@ -44,5 +44,6 @@ namespace Library.figures
         {
             return FigureColor.White;
         }
+        
     }
 }

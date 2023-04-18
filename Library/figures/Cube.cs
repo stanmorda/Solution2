@@ -3,7 +3,7 @@ using Library.figures.@abstract;
 
 namespace Library.figures
 {
-    public class Cube : IThreeDimensionFigure<int>
+    public partial class Cube
     {
         private double _a;
         
@@ -13,7 +13,8 @@ namespace Library.figures
         }
 
         public double Area => 6 * _a * _a;
-        public double Perimeter => 8 * _a;
+     
+
         public FigureType FigureType => FigureType.Cube;
         public int FigureId { get; }
 

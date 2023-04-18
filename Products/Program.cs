@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Library.figures;
 using Products.mails;
 
 namespace Products
@@ -8,6 +9,8 @@ namespace Products
     {
         static void Main(string[] args)
         {
+            MainFigures();
+            return;
             Main1();
             return;
             void OnMail(object sender, MailEventArgs eventArgs)
@@ -107,6 +110,28 @@ namespace Products
         }
 
 
+        static void MainFigures()
+        {
+
+            int i = 1;
+            
+            i.PrintInt();
+            
+            var cube = new Cube(1, 10);
+            cube.GetAreaAndVolSumm();
+
+            var circle = new Circle(10, "324");
+            
+            circle.CalculateAndPrint("Квадрат площади");
+
+            //var prop = GetAreaAndVolSumm(cube);
+        }
+
+        static double GetAreaAndVolSumm(Cube cube)
+        {
+            return cube.Perimeter + cube.Volume;
+        }
+        
         static void Main1()
         {
             var pr1 = new Product(10000, "pr1");
