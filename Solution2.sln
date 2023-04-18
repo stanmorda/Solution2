@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Products", "Products\Produc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransportPayment", "TransportPayment\TransportPayment.csproj", "{FEABD463-E443-46D0-A6F2-8E9E9704B8B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{89F58CCB-6EBC-40FD-8C0C-D25E85A8587D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,5 +62,9 @@ Global
 		{FEABD463-E443-46D0-A6F2-8E9E9704B8B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEABD463-E443-46D0-A6F2-8E9E9704B8B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEABD463-E443-46D0-A6F2-8E9E9704B8B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89F58CCB-6EBC-40FD-8C0C-D25E85A8587D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89F58CCB-6EBC-40FD-8C0C-D25E85A8587D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89F58CCB-6EBC-40FD-8C0C-D25E85A8587D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89F58CCB-6EBC-40FD-8C0C-D25E85A8587D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
