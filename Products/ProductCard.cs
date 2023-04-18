@@ -19,6 +19,12 @@ namespace Products
         private readonly Func<decimal, decimal> _calculateSaleFunc;
         private readonly Predicate<decimal> _presentGift;
 
+        public event EventHandler<decimal> BuyEvent;
+        
+        protected virtual void OnBuyEvent(decimal total)
+        {
+            BuyEvent?.Invoke(this, total);
+        }
 
         public event EventHandler<ProductAddEventArgs> ProductAddedEvent;
         
@@ -49,6 +55,14 @@ namespace Products
             {
                 AddProduct(product);
             }
+        }
+
+        public decimal Buy()
+        {
+            var total = GetTotalSumm();
+            Items.Clear();
+            OnBuyEvent(total);
+            return total;
         }
 
         public decimal GetTotalSumm()
@@ -84,7 +98,7 @@ namespace Products
         }
 
 
- 
+
     }
     
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Products.mails
 {
@@ -18,7 +19,22 @@ namespace Products.mails
         
         protected virtual void OnGetMailEvent(MailEventArgs e)
         {
+
+            // var1
+            // if (GetMailEvent != null)
+            // {
+            //     GetMailEvent.Invoke(this, e);
+            // }
+         
+            //var2
             GetMailEvent?.Invoke(this, e);
+            
+            // var1 == var2
+        }
+
+        public void PrintInvocationList()
+        {
+            Console.WriteLine(GetMailEvent.GetInvocationList().Length);
         }
     }
 

@@ -8,12 +8,29 @@ namespace Products
     {
         static void Main(string[] args)
         {
+            Main1();
+            return;
+            void OnMail(object sender, MailEventArgs eventArgs)
+            {
+                //Console.WriteLine($"5Получено письмо: {eventArgs.Mail}");
+            }
+            
+            void OnMail1(object sender, MailEventArgs eventArgs)
+            {
+                //Console.WriteLine($"5Получено письмо: {eventArgs.Mail}");
+            }
 
             var man = new Human();
             
-            man.GetMailEvent += (sender, eventArgs) => Console.WriteLine($"Получено письмо: {eventArgs.Mail}");
+            man.GetMailEvent += OnMail;
+            man.GetMailEvent += OnMail1;
+            man.PrintInvocationList();
 
             man.AddMail(new Mail("ssfd", "sdf", "sdf"));
+            
+            man.GetMailEvent -= OnMail;
+            man.PrintInvocationList();
+            
             
             // EventHandler<ProductAddEventArgs> cardOnProductAddedEvent()
             // {
@@ -90,6 +107,27 @@ namespace Products
         }
 
 
+        static void Main1()
+        {
+            var pr1 = new Product(10000, "pr1");
+            var pr2 = new Product(99, "pr2");
+            var pr3 = new Product(10, "pr3");
+
+            var card = new ProductCard(NotifyMagnit, NotifyOfSaleByConsole, CalculateSaleMagnit, obj => true);
+            
+            card.BuyEvent += CardOnBuyEvent;
+            card.AddProducts(new []{pr1, pr2, pr3});
+            card.Buy();
+            
+            card.BuyEvent -= CardOnBuyEvent;
+
+            
+        }
+
+        private static void CardOnBuyEvent(object sender, decimal total)
+        {
+            Console.WriteLine($"Сделана покупка на сумму {total}");
+        }
 
         public static void NotifyPerekrestok(Product product)
         {
