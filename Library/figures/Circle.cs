@@ -3,6 +3,10 @@ using Library.figures.@abstract;
 
 namespace Library.figures
 {
+    [Obsolete(message:"Логика устарела")]
+    
+    [Author("Stanislav", "21/04/2023")]
+    
     public class Circle : ITwoDimensionFigure<string>
     {
         private double _r;

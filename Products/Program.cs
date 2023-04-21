@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Library;
 using Library.figures;
 using Products.mails;
 
@@ -9,6 +10,19 @@ namespace Products
     {
         static void Main(string[] args)
         {
+            //var circle = new Circle(1, "23");
+
+            var typeOfCircle = typeof(Circle);
+            foreach (var att in typeOfCircle.GetCustomAttributes(true))
+            {
+                if (att is AuthorAttribute authorAttribute)
+                {
+                    Console.WriteLine($"Наш атрибут: {authorAttribute}");
+                }
+            }
+            return;
+            
+            
             MainFigures();
             return;
             Main1();

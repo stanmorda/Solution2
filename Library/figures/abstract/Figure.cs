@@ -28,6 +28,7 @@ namespace Library.figures.@abstract
         
         public int GetAnglesCount();
 
+        [Author("Stanislav", "21/04/2023")]
         public FigureColor GetColor()
         {
             return FigureColor.Black;
