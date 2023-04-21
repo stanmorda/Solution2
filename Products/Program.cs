@@ -20,6 +20,7 @@ namespace Products
                     Console.WriteLine($"Наш атрибут: {authorAttribute}");
                 }
             }
+            
             return;
             
             
