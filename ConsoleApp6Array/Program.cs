@@ -2,11 +2,25 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using Products;
+using System.Linq;
 
 namespace ConsoleApp6Array
 {
     class Program
     {
+
+        class LinqResult
+        {
+            public string Title { get; set; }
+            public decimal Price { get; set; }
+
+            public LinqResult(string title, decimal price)
+            {
+                Title = title;
+                Price = price;
+            }
+        }
+        
         static void Main(string[] args)
         {
 
@@ -28,19 +42,68 @@ namespace ConsoleApp6Array
             
             var milk2 = new Product(100, "Milk");
             
-            var pr1 = new Product(80, "1");
+            var pr1 = new Product(80, "1"){IsNew = true};
             var pr2 = new Product(90, "2");
+
+            var pr3 = new Product(70, "3"){IsNew = true};
+            var pr4 = new Product(70, "4");
+
+            var pr5 = new Product();
+            pr5.Id = 123;
+
+            var card1 = new ProductCard(new List<Product>() { milk1, pr1, pr2 });
+            var card2 = new ProductCard(new List<Product>() { milk2, pr3, pr4 });
+            var card3 = new ProductCard(new List<Product>() { milk2, pr3, pr4,milk1, pr1, pr2 });
+
+            var listOfCard = new List<ProductCard>() { card1, card2, card3 };
+
+            var newProd = listOfCard
+                .SelectMany(x => x.Items)
+                .Where(x => x.IsNew == true)
+                .ToArray();
+
+            var sum = newProd.Sum(x => x.Price);
+            var count = newProd.Count();
             
-            var pr3 = new Product(70, "3");
-            var pr4 = new Product(70, "3");
-            
+            // 1. count
+            // 2. sum
+
             Console.WriteLine($"{milk2 == milk2}");
             
             var list = new List<Product>();
             //
             list.Add(milk1);
             list.Add(milk2);
+            list.Add(pr1);
+            list.Add(pr2);
+            list.Add(pr3);
+            list.Add(pr4);
+
+            list = list.Skip(400).ToList();
+                            
+            var newProduct = new List<string>();
             
+            foreach (var product in list)
+            {
+                if (product.IsNew)
+                {
+                    newProduct.Add(product.Title);
+                }
+            }
+            
+            Console.WriteLine("Новые продукты:");
+            Console.WriteLine(string.Join(";", newProduct));
+
+            var v = new { Amount = 108, Message = "Hello" };
+
+            var newProductsByLinq = list
+                .Where(product => product.IsNew == true)
+                .Where(product => product.Price>10)
+                .Take(5)
+                .Select(product => new LinqResult(product.Title, product.Price))
+                .ToArray();
+            
+            return;
             
             //
             // list.RemoveAll(x => x == milk);

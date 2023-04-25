@@ -153,13 +153,13 @@ namespace Products
             var pr2 = new Product(99, "pr2");
             var pr3 = new Product(10, "pr3");
 
-            var card = new ProductCard(NotifyMagnit, NotifyOfSaleByConsole, CalculateSaleMagnit, obj => true);
-            
-            card.BuyEvent += CardOnBuyEvent;
-            card.AddProducts(new []{pr1, pr2, pr3});
-            card.Buy();
-            
-            card.BuyEvent -= CardOnBuyEvent;
+            // var card = new ProductCard(NotifyMagnit, NotifyOfSaleByConsole, CalculateSaleMagnit, obj => true);
+            //
+            // card.BuyEvent += CardOnBuyEvent;
+            // card.AddProducts(new []{pr1, pr2, pr3});
+            // card.Buy();
+            //
+            // card.BuyEvent -= CardOnBuyEvent;
 
             
         }

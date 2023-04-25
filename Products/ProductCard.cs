@@ -33,20 +33,16 @@ namespace Products
             ProductAddedEvent?.Invoke(this, new ProductAddEventArgs(addedProduct));
         }
         
-        public ProductCard(Action<Product> notifyAddedProduct, Action<decimal, decimal> notifyOfSalePercent, Func<decimal, decimal> calculateSaleFunc, Predicate<decimal> presentGift)
+        public ProductCard(List<Product> products)
         {
-            Items = new List<Product>();
-            _notifyAddedProduct = notifyAddedProduct;
-            _notifyOfSalePercent = notifyOfSalePercent;
-            _calculateSaleFunc = calculateSaleFunc;
-            _presentGift = presentGift;
+            Items = products;
         }
         
         public void AddProduct(Product product)
         {   
             Items.Add(product);
-            OnProductAddedEvent(product);
-            _notifyAddedProduct(product);
+            //OnProductAddedEvent(product);
+            //_notifyAddedProduct(product);
         }
 
         public void AddProducts(params Product[] products)
