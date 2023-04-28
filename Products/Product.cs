@@ -34,7 +34,7 @@ namespace Products
 
         protected bool Equals(Product other)
         {
-            return Id == other.Id;
+            return Price == other.Price && Title == other.Title;
         }
 
         public override bool Equals(object obj)
