@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Products;
 using System.Linq;
+using System.Threading;
 
 namespace ConsoleApp6Array
 {

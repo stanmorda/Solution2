@@ -21,6 +21,7 @@ namespace TransportPayment
             //     
 
             var card1 = new Card(s => Console.WriteLine(s));
+            
             card1.Add(100);
             card1.Pay(10);
             card1.Pay(10);
