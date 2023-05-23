@@ -21,6 +21,32 @@ namespace ThreadTest
             // Test3();
 
             
+            // var1
+            lock (_sync)
+            {
+                Console.WriteLine("lock");
+            }
+
+            // var2
+            try
+            {
+                
+                Monitor.Enter(_sync);
+                
+                // if(!Monitor.TryEnter(_sync, TimeSpan.FromMilliseconds(100)))
+                //     throw new TimeoutException("Timeout");
+                
+                // critical section
+                
+                Console.WriteLine("lock");
+            }
+            finally
+            {
+                Monitor.Exit(_sync);
+            }
+            
+            
+            
 
             Thread t1 = new Thread(ReadDelegate){Name = "Reader1"};
             Thread t3 = new Thread(ReadDelegate){Name = "Reader2"};
