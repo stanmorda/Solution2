@@ -8,14 +8,86 @@ namespace ThreadTest
 {
     class Program
     {
+
+        private static List<int> _list = new List<int>();
+        private static object _sync = new object();
+        
         static void Main(string[] args)
         {
             // CreateThreadMethodOne();
 
             // CreateThreadMethodTwo();
 
-            var figures = new List<Cube>();
+            // Test3();
+
             
+
+            Thread t1 = new Thread(ReadDelegate){Name = "Reader1"};
+            Thread t3 = new Thread(ReadDelegate){Name = "Reader2"};
+            Thread t4 = new Thread(ReadDelegate){Name = "Reader3"};
+            
+            Thread writeThread = new Thread(WriteDelegate){Name = "Writer"};
+            
+            t1.Start();
+            t3.Start();
+            t4.Start();
+            
+            writeThread.Start();
+            
+            Console.ReadLine();
+        }
+
+        private static void ReadDelegate()
+        {
+            while (true)
+            {
+                //var copy = _list.ToList();
+
+                lock (_sync)
+                {
+                    foreach (var item in _list)
+                    {
+                        Console.Write(item);
+                    }
+                }
+                
+                Thread.Sleep(TimeSpan.FromMilliseconds(100));
+            }
+        }
+
+
+        private static void WriteDelegate()
+        {
+            while (true)
+            {
+                int h = 0;
+                
+                lock (_sync)
+                {
+                    _list.Add(1);
+                }
+                
+                Thread.Sleep(TimeSpan.FromMilliseconds(100));
+            }
+        }
+        
+        
+        private static void TestDelagate()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                lock (_sync)
+                {
+                    _list.Add(i);
+                    _list.Remove(i);
+                }
+            }
+        }
+
+        private static void Test3()
+        {
+            var figures = new List<Cube>();
+
             foreach (var i in Enumerable.Range(1, 100))
             {
                 figures.Add(new Cube(i, i));
@@ -34,9 +106,9 @@ namespace ThreadTest
 
             AutoResetEvent flag1 = new AutoResetEvent(false);
             AutoResetEvent flag2 = new AutoResetEvent(false);
-            
+
             Console.WriteLine(Environment.ProcessorCount);
-            
+
             var thread1 = new Thread(o =>
             {
                 summ1 = figures
@@ -46,17 +118,17 @@ namespace ThreadTest
                 //finished1 = true;
                 flag1.Set();
             });
-            
+
             var thread2 = new Thread(o =>
             {
                 summ2 = figures
                     .TakeLast(figures.Count / 2)
                     .Select(x => x.Volume)
                     .Sum();
-               // finished2 = true;
+                // finished2 = true;
                 flag2.Set();
             });
-                
+
             thread1.Start();
             thread2.Start();
 
@@ -68,17 +140,13 @@ namespace ThreadTest
             {
                 Console.WriteLine($"Не удалось произвести расчеты.");
             }
-            
+
             // while (!finished1 || !finished2)
             // {
             //     Thread.Sleep(TimeSpan.FromMilliseconds(10));
             // }
-            
-            //Thread.Sleep(TimeSpan.FromSeconds(5));
-            
-           
 
-            Console.ReadLine();
+            //Thread.Sleep(TimeSpan.FromSeconds(5));
         }
 
         private static void CreateThreadMethodTwo()
