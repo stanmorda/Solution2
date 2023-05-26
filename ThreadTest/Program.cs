@@ -10,6 +10,7 @@ namespace ThreadTest
     {
 
         private static List<int> _list = new List<int>();
+        
         private static object _sync = new object();
         
         static void Main(string[] args)
@@ -20,47 +21,82 @@ namespace ThreadTest
 
             // Test3();
 
-            
-            // var1
-            lock (_sync)
-            {
-                Console.WriteLine("lock");
-            }
+            //
+            // // var1
+            // lock (_sync)
+            // {
+            //     Console.WriteLine("lock");
+            // }
+            //
+            // // var2
+            // try
+            // {
+            //     
+            //     Monitor.Enter(_sync);
+            //     
+            //     // if(!Monitor.TryEnter(_sync, TimeSpan.FromMilliseconds(100)))
+            //     //     throw new TimeoutException("Timeout");
+            //     
+            //     // critical section
+            //     
+            //     Console.WriteLine("lock");
+            // }
+            // finally
+            // {
+            //     Monitor.Exit(_sync);
+            // }
+            //
+            //
+            // Thread t1 = new Thread(ReadDelegate){Name = "Reader1"};
+            // Thread t3 = new Thread(ReadDelegate){Name = "Reader2"};
+            // Thread t4 = new Thread(ReadDelegate){Name = "Reader3"};
+            //
+            // Thread writeThread = new Thread(WriteDelegate){Name = "Writer"};
+            //
+            // t1.Start();
+            // t3.Start();
+            // t4.Start();
+            //
+            // writeThread.Start();
 
-            // var2
-            try
-            {
-                
-                Monitor.Enter(_sync);
-                
-                // if(!Monitor.TryEnter(_sync, TimeSpan.FromMilliseconds(100)))
-                //     throw new TimeoutException("Timeout");
-                
-                // critical section
-                
-                Console.WriteLine("lock");
-            }
-            finally
-            {
-                Monitor.Exit(_sync);
-            }
-            
-            
-            
 
-            Thread t1 = new Thread(ReadDelegate){Name = "Reader1"};
-            Thread t3 = new Thread(ReadDelegate){Name = "Reader2"};
-            Thread t4 = new Thread(ReadDelegate){Name = "Reader3"};
-            
-            Thread writeThread = new Thread(WriteDelegate){Name = "Writer"};
-            
-            t1.Start();
-            t3.Start();
-            t4.Start();
-            
-            writeThread.Start();
-            
+            DeadLock();
+
+
             Console.ReadLine();
+        }
+
+        private static void DeadLock()
+        {
+            object o1 = new object();
+            object o2 = new object();
+
+            Thread th1 = new Thread(() =>
+            {
+                lock (o1) // 1
+                {
+                    lock (o2) // 2
+                    {
+                        
+                    }
+                }
+            });
+
+            Thread th2 = new Thread(() =>
+            {
+                lock (o2) // 1
+                {
+                    lock (o1) // 2
+                    {
+                        
+                    }
+                }
+            });
+
+
+            th1.Start();
+            
+            th2.Start();
         }
 
         private static void ReadDelegate()
