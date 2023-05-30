@@ -32,6 +32,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTasks", "TestTasks\Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceInThreads", "RaceInThreads\RaceInThreads.csproj", "{5BD5A779-FFD1-4BB7-A1C8-F2AEBEE95848}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParallelTest", "ParallelTest\ParallelTest.csproj", "{DB736F85-2FAC-491F-89DD-A20947BD2FC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,5 +104,9 @@ Global
 		{5BD5A779-FFD1-4BB7-A1C8-F2AEBEE95848}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BD5A779-FFD1-4BB7-A1C8-F2AEBEE95848}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BD5A779-FFD1-4BB7-A1C8-F2AEBEE95848}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB736F85-2FAC-491F-89DD-A20947BD2FC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB736F85-2FAC-491F-89DD-A20947BD2FC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB736F85-2FAC-491F-89DD-A20947BD2FC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB736F85-2FAC-491F-89DD-A20947BD2FC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
