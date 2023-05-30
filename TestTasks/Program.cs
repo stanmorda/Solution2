@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,6 +10,8 @@ namespace TestTasks
     {
         private static object _sync = new object();
 
+        private static CancellationTokenSource _cancellationTokenSource;
+        
         static void Main(string[] args)
         {
             // 1st var
@@ -47,14 +50,47 @@ namespace TestTasks
             // Console.WriteLine($"RESULT is {r1+r2}. TIME is {time.ElapsedMilliseconds}ms");
             
             var time = Stopwatch.StartNew();
-            var task1 = Task.Factory.StartNew(LongWork1);
-            var task2 = Task.Factory.StartNew(LongWork2);
+
+
+            _cancellationTokenSource = new CancellationTokenSource();
+
+            try
+            {
+                var task1 = Task.Factory.StartNew(LongWork1, _cancellationTokenSource.Token);
+
+                var task2 = Task.Factory.StartNew(LongWork2, _cancellationTokenSource.Token);
+
+                //Task.WaitAll(task1, task2);
+
+                var tasks = new Task<int>[2] { task1, task2 };
+
+                int finishedTaskIndex = Task.WaitAny(tasks);
+
+                _cancellationTokenSource.Cancel(true);
+
+                var result = tasks[finishedTaskIndex];
+                Console.WriteLine($"Result {result.Result}. Finished task index={finishedTaskIndex}");
+                
+                time.Stop();
             
-            Task.WaitAll(task1, task2);
-            
-            time.Stop();
-            
-            Console.WriteLine($"RESULT is {task1.Result + task2.Result}. TIME is {time.ElapsedMilliseconds}ms");
+                Console.WriteLine($"RESULT is {task1.Result + task2.Result}. TIME is {time.ElapsedMilliseconds}ms");
+            }
+            catch (AggregateException exception)
+            {
+                
+            }
+
+            // for (int i = 0; i < tasks.Length; i++)
+            // {
+            //     if (i != finishedTaskIndex)
+            //     {
+            //         var task = tasks[i];
+            //     }
+            // }
+
+            //Console.ReadLine();
+
+          
             
             
             // while (true)
@@ -62,8 +98,8 @@ namespace TestTasks
             //     Console.WriteLine("main thread");
             //     Thread.Sleep(500);
             // }
-            
-            
+
+
             return;
             
             
@@ -126,12 +162,23 @@ namespace TestTasks
         private static int LongWork1()
         {
             Thread.Sleep(2000);
+            if (_cancellationTokenSource.IsCancellationRequested)
+            {
+                _cancellationTokenSource.Token.ThrowIfCancellationRequested();
+            }
             return Calc();
         }
         
         private static int LongWork2()
         {
             Thread.Sleep(5000);
+            
+            if (_cancellationTokenSource.IsCancellationRequested)
+            {
+                _cancellationTokenSource.Token.ThrowIfCancellationRequested();
+            }
+            
+            Console.WriteLine("FINISHED long work 2");
             return Calc() * Calc()* Calc();
         }
     }
