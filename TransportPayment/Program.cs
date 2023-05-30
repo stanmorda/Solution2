@@ -20,6 +20,7 @@ namespace TransportPayment
             //     ○ при срабатывании события - писать текст события в консоль
             //     
 
+            
             var card1 = new Card(s => Console.WriteLine(s));
             
             card1.Add(100);
@@ -36,6 +37,9 @@ namespace TransportPayment
         class Card
         {
 
+            private readonly object _sync = new object();
+            
+            
             public List<decimal> History { get; set; }
             
             public decimal Balance { get; set; }
@@ -60,6 +64,7 @@ namespace TransportPayment
 
             public void Add(decimal summ)
             {
+                
                 Balance += summ;
                 _notifyAction($"{Balance}");
                 
@@ -67,9 +72,14 @@ namespace TransportPayment
 
             public void Pay(decimal summ)
             {
-                Balance -= summ;
-                _notifyAction($"{Balance}");
-                
+                lock (_sync)
+                {
+                    Balance -= summ;
+                    _notifyAction($"{Balance}");
+
+                    // add to list
+                }
+              
             }
             
             

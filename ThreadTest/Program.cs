@@ -105,7 +105,7 @@ namespace ThreadTest
             {
                 //var copy = _list.ToList();
 
-                lock (_sync)
+                //lock (_sync)
                 {
                     foreach (var item in _list)
                     {
@@ -124,7 +124,7 @@ namespace ThreadTest
             {
                 int h = 0;
                 
-                lock (_sync)
+                //lock (_sync)
                 {
                     _list.Add(1);
                 }
