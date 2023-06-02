@@ -34,6 +34,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceInThreads", "RaceInThre
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParallelTest", "ParallelTest\ParallelTest.csproj", "{DB736F85-2FAC-491F-89DD-A20947BD2FC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncTestUI", "AsyncTestUI\AsyncTestUI.csproj", "{17C14018-7D50-41DF-95C8-3578ADBAD15C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -108,5 +110,9 @@ Global
 		{DB736F85-2FAC-491F-89DD-A20947BD2FC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB736F85-2FAC-491F-89DD-A20947BD2FC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB736F85-2FAC-491F-89DD-A20947BD2FC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17C14018-7D50-41DF-95C8-3578ADBAD15C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17C14018-7D50-41DF-95C8-3578ADBAD15C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17C14018-7D50-41DF-95C8-3578ADBAD15C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17C14018-7D50-41DF-95C8-3578ADBAD15C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
