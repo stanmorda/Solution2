@@ -165,7 +165,6 @@ namespace AsyncTestUI
             TaskButton.IsEnabled = true;
             CancelButton.IsEnabled = false;
 
-
         }
         
         private void Cancel_OnClick(object sender, RoutedEventArgs e)
