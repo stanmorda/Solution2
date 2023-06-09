@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace TransportPayment
 {
     class Program
     {
+        private static Queue<EventArgs> _testEventsQueue = new Queue<EventArgs>();
         static void Main(string[] args)
         {
             // Создать класс транспортная карта
@@ -20,9 +23,35 @@ namespace TransportPayment
             //     ○ при срабатывании события - писать текст события в консоль
             //     
 
-            
             var card1 = new Card(s => Console.WriteLine(s));
+
+            card1.TestEvent += (sender, eventArgs) =>
+            {
+                _testEventsQueue.Enqueue(eventArgs);
+            };
             
+            Task.Factory.StartNew(() =>
+            {
+                while (true)
+                {
+                    card1.Pay(100);
+                    Thread.Sleep(100);
+                }
+            });
+
+            Task.Factory.StartNew(() =>
+            {
+                while (true)
+                {
+                    if (_testEventsQueue.TryDequeue(out var result))
+                    {
+                        // do some works
+                    }
+                }
+            });
+
+
+
             card1.Add(100);
             card1.Pay(10);
             card1.Pay(10);
@@ -57,6 +86,9 @@ namespace TransportPayment
             //private Func<decimal, decimal> _calculateCashback;
 
 
+            public event EventHandler TestEvent;
+            
+
             public Card(Action<string> notifyAction)
             {
                 _notifyAction = notifyAction;
@@ -79,10 +111,16 @@ namespace TransportPayment
 
                     // add to list
                 }
-              
+
+                OnTestEvent();
+
             }
-            
-            
+
+
+            protected virtual void OnTestEvent()
+            {
+                TestEvent?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
     
