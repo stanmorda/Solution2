@@ -49,9 +49,16 @@ namespace Figures
             {
             }
         }
+
+
+        static class T
+        {
+            
+        }
         
         static void Main(string[] args)
         {
+
 
             var obj1 = new ObjByte(1);
             var obj2 = new ObjString("id_1");
