@@ -20,6 +20,27 @@ public class WeatherForecastController : ControllerBase
        
     }
 
+    [HttpPost]
+    [Route("save")]
+    public void SaveForecast(WeatherForecast forecast)
+    {
+        ForecastHolder.AddForecast(forecast);
+    }
+
+    [HttpGet]
+    [Route("history")]
+    public OkObjectResult GetHistory()
+    {
+        return Ok(ForecastHolder.History);
+    }
+    
+    [HttpGet]
+    [Route("summary")]
+    public string GetSummary(int index, string comment)
+    {
+        return $"{Summaries[index]}-{comment}";
+    }
+
     [HttpGet(Name = "GetWeatherForecast")]
     public WeatherForecast[] Get()
     {
@@ -33,13 +54,13 @@ public class WeatherForecastController : ControllerBase
 
         foreach (var forecast in list)
         {
-            if (RecordHolder.Max == null || forecast.TemperatureC >= RecordHolder.Max.TemperatureC)
+            if (ForecastHolder.Max == null || forecast.TemperatureC >= ForecastHolder.Max.TemperatureC)
             {
-                RecordHolder.Max = forecast;
+                ForecastHolder.Max = forecast;
             }
-            if (RecordHolder.Min == null || forecast.TemperatureC <= RecordHolder.Min.TemperatureC)
+            if (ForecastHolder.Min == null || forecast.TemperatureC <= ForecastHolder.Min.TemperatureC)
             {
-                RecordHolder.Min = forecast;
+                ForecastHolder.Min = forecast;
             }
         }
         
@@ -51,24 +72,24 @@ public class WeatherForecastController : ControllerBase
     [Route("max")]
     public ObjectResult Max()
     {
-        if (RecordHolder.Max == null)
+        if (ForecastHolder.Max == null)
         {
             return BadRequest("Max is null");
         }
         
-        return Ok(RecordHolder.Max);
+        return Ok(ForecastHolder.Max);
     }
     
     [HttpGet]
     [Route("min")]
     public ObjectResult Min()
     {
-        if (RecordHolder.Min == null)
+        if (ForecastHolder.Min == null)
         {
             return BadRequest("Min is null");
         }
         
-        return Ok(RecordHolder.Min);
+        return Ok(ForecastHolder.Min);
     }
     
     
