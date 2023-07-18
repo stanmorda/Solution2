@@ -1,3 +1,4 @@
+using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using WebApiModel;
 
@@ -15,6 +16,8 @@ public class WeatherForecastController : ControllerBase
     };
 
   
+    
+    
     public WeatherForecastController()
     {
        
@@ -22,18 +25,22 @@ public class WeatherForecastController : ControllerBase
 
     [HttpPost]
     [Route("save")]
-    public void SaveForecast(WeatherForecast forecast)
+    public void SaveForecast([FromForm] WeatherForecast forecast )
     {
+        throw new DataException("dfgdf");
+       // Console.WriteLine($"Post request:{DateTime.Now} {forecast.ToString()}");
         ForecastHolder.AddForecast(forecast);
+       // Console.WriteLine($"Post response:{DateTime.Now}");
     }
 
     [HttpGet]
     [Route("history")]
-    public OkObjectResult GetHistory()
+    public ActionResult GetHistory()
     {
         return Ok(ForecastHolder.History);
+
     }
-    
+
     [HttpGet]
     [Route("summary")]
     public string GetSummary(int index, string comment)
@@ -72,12 +79,14 @@ public class WeatherForecastController : ControllerBase
     [Route("max")]
     public ObjectResult Max()
     {
+        
         if (ForecastHolder.Max == null)
         {
             return BadRequest("Max is null");
         }
         
         return Ok(ForecastHolder.Max);
+        
     }
     
     [HttpGet]

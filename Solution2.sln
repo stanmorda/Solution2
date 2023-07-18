@@ -46,6 +46,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiModel", "WebApiModel\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiClient", "WebApiClient\WebApiClient.csproj", "{2702205A-646C-4B41-A77A-FA84812FBF04}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDbConnection", "TestDbConnection\TestDbConnection.csproj", "{D321A78F-64F1-47C8-9C1E-F46EA919C526}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -144,5 +146,9 @@ Global
 		{2702205A-646C-4B41-A77A-FA84812FBF04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2702205A-646C-4B41-A77A-FA84812FBF04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2702205A-646C-4B41-A77A-FA84812FBF04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D321A78F-64F1-47C8-9C1E-F46EA919C526}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D321A78F-64F1-47C8-9C1E-F46EA919C526}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D321A78F-64F1-47C8-9C1E-F46EA919C526}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D321A78F-64F1-47C8-9C1E-F46EA919C526}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,3 +1,5 @@
+using TestWebApi.CustomMiddleware;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -22,4 +24,26 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+//app.UseLogUrls();
+
+// app.UseRouting();
+// app.UseEndpoints(endPoints =>
+// {
+//     endPoints.MapGet("/hello", async context => await context.Response.WriteAsync("hello!"));
+// });
+
+app.MapGet("/hello", async context =>
+{
+    
+    await context.Response.WriteAsync("map1");
+    
+    await context.Response.WriteAsync("map2");
+    
+});
+
+//app.MapGet("/hello", async context => await context.Response.WriteAsync("map2"));
+
+//app.MapPost("/hello123", async context => await context.Response.WriteAsync("map1"));
+
 app.Run();
+
