@@ -1,0 +1,90 @@
+CREATE TABLE public."TestTableBySQL"
+(
+    "PersonID" integer NOT NULL,
+    "FirstName" character varying(255) NOT NULL,
+    "LastName" character varying(255),
+    "Address" character varying(255),
+    "City" character varying(100) NOT NULL,
+    PRIMARY KEY ("PersonID")
+);
+
+ALTER TABLE IF EXISTS public."TestTableBySQL"
+    OWNER to postgres;
+
+
+
+
+ALTER TABLE IF EXISTS public."TestTableBySQL"
+    ALTER COLUMN "Gender" TYPE character varying(2);
+	
+ALTER TABLE public."TestTableBySQL"
+DROP COLUMN "Gender"
+
+DROP TABLE public."TestTableBySQL"
+
+
+
+SELECT * FROM "TestTable" 
+ORDER BY "PersonID"
+
+SELECT * FROM "TestTableBySQL" 
+ORDER BY "PersonID"
+
+INSERT INTO public."Clients"("PersonID", "FirstName", "LastName", "Address", "City", "Gender")
+VALUES (1, 'IVan', '', 'Earth', 'Spb', 'M');
+
+INSERT INTO public."TestTable"("PersonID", "FirstName", "LastName", "Address", "City", "Gender")
+VALUES (6, 'Eva', '', 'Earth', 'Spb', 'F');
+
+DELETE FROM public."TestTable" 
+WHERE "PersonID"=1;
+
+
+UPDATE public."TestTable" 
+SET "FirstName"='Ivan', "LastName"='Ivanov'
+WHERE "PersonID"=1;
+
+CREATE TABLE public."ClientNames"
+(
+    "FirstName" character varying(255) NOT NULL
+);
+
+CALL "TestProcedure"()
+
+SELECT * FROM  "Clients" 
+CALL "AddClient"('Petr')
+
+WHERE "City"='Spb'
+
+DELETE FROM public."ClientNames" 
+WHERE "FirstName" LIKE '%a_';
+
+INSERT INTO "ClientNames"("FirstName")
+SELECT DISTINCT "FirstName" FROM "TestTable"
+
+
+SELECT "t1"."FirstName" FROM "ClientNames" as "t1"
+JOIN "ClientNames" as "t2" ON "t1"."FirstName"="t2"."FirstName"
+
+
+ALTER TABLE public."TestTable" RENAME TO "Clients"
+
+
+ALTER TABLE IF EXISTS public."ClientNames"
+    ADD CONSTRAINT "FirstName" FOREIGN KEY ("FirstName")
+    REFERENCES public."Clients" ("FirstName")
+	
+-- 	ALTER TABLE IF EXISTS public."ClientNames"
+--     DROP FOREIGN KEY "FirstName";
+
+CREATE OR REPLACE FUNCTION GetClients(city text) RETURNS TABLE(id integer, name text)
+    AS $$ 
+	SELECT "PersonID", "FirstName" from "Clients"  
+	WHERE "City"=city
+	ORDER BY "PersonID"
+	$$
+	LANGUAGE SQL;
+
+SELECT * FROM GetClients('Spb');
+
+select * from "Clients"
